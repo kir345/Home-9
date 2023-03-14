@@ -1,30 +1,28 @@
-﻿// Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов 
-//в промежутке от M до N.
-//M = 1; N = 15 -> 120
-//M = 4; N = 8. -> 30
+﻿// Напишите программу вычисления функции Аккермана с помощью рекурсии. 
+//Даны два неотрицательных числа m и n.
+//m = 2, n = 3 -> A(m,n) = 9
+//m = 3, n = 2 -> A(m,n) = 29
 
 using System;
 using static System.Console;
 
 Clear();
-WriteLine("Введите значение M: ");
-int numM = int.Parse(ReadLine());
+int m = InputNum("Введите m: ");
+int n = InputNum("Введите n: ");
+int A = Ack(m, n);
 
-WriteLine("Введите значение N: ");
-int numN = int.Parse(ReadLine());
+Write($"Функция Аккермана = {A} ");
 
-void GapNumSum (int numM, int numN, int sum)
+int Ack(int m, int n)
 {
-    if (numM > numN)
-    {
-        WriteLine($"-> {sum}");
-        return;
-    }
-    sum = sum + (numM++);
-    GapNumSum (numM, numN, sum);
+  if (m == 0) return n + 1;
+  else if (n == 0) return Ack(m - 1, 1);
+  else return Ack(m - 1, Ack(m, n - 1));
 }
-GapNumSum(numM, numN, 0);
 
-
-
-
+int InputNum(string input) 
+{
+  Write(input);
+  int output = Convert.ToInt32(ReadLine());
+  return output;
+}
